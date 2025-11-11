@@ -1,0 +1,47 @@
+<!-- produtos.html -->
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+</head>
+<body>
+    <!-- Conteúdo que será injetado no layout-base -->
+    <div th:fragment="conteudo">
+        <h2>Produtos</h2>
+
+        <!-- Formulário para adicionar produto -->
+        <form action="/produtos/adicionar" method="post">
+            <input type="text" name="titulo" placeholder="Título" required />
+            <input type="text" name="descricao" placeholder="Descrição" />
+            <input type="number" name="preco" placeholder="Preço" step="0.01" />
+            <select name="categoria.id">
+                <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nome}"></option>
+            </select>
+            <button type="submit">Salvar</button>
+        </form>
+
+        <!-- Tabela de produtos -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="p : ${produtos}">
+                    <td th:text="${p.titulo}"></td>
+                    <td th:text="${p.descricao}"></td>
+                    <td th:text="${p.categoria.nome}"></td>
+                    <td>
+                        <a th:href="@{'/produtos/editar/' + ${p.id}}">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

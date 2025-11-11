@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Compras</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <div class="container">
+        <!-- MENU LATERAL -->
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <a href="/">Início</a>
+            <a href="/">Produtos</a>
+            <a href="/categorias">Categorias</a>
+            <a href="/financas">Finanças</a>
+        </div>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="content">
+            <h1>Bem-vindo ao Sistema de Compras</h1>
+            <p>Gerencie suas compras, produtos e categorias de forma eficiente.</p>
+
+            <!-- LISTA DE PRODUTOS -->
+            <h2>Produtos Cadastrados</h2>
+            <a class="botao" th:href="@{/novo}">+ Novo Produto</a>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="produto : ${paginaProduto}">
+                        <td th:text="${produto.id}"></td>
+                        <td th:text="${produto.nome}"></td>
+                        <td th:text="${#numbers.formatDecimal(produto.preco, 1, 2)}"></td>
+                        <td th:text="${produto.categoria != null ? produto.categoria.nome : 'Sem categoria'}"></td>
+                        <td>
+                            <a th:href="@{'/produtos/editar/' + ${produto.id}}">Editar</a> |
+                            <a th:href="@{'/produtos/excluir/' + ${produto.id}}" style="color: red;">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- LISTA DE CATEGORIAS -->
+            <h2>Categorias</h2>
+            <ul>
+                <li th:each="cat : ${paginaCategoria}" th:text="${cat.nome}"></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

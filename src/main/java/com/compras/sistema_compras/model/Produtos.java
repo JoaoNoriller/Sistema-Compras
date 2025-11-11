@@ -1,10 +1,12 @@
 package com.compras.sistema_compras.model;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
+@Entity
 public class Produtos {
 
     @Id
@@ -12,6 +14,8 @@ public class Produtos {
     private long id;
     private String nome;
     private double preco;
+    private String descricao;
+    private String dataCadastro;
 
     @ManyToOne
     private Categoria categoria;
@@ -48,6 +52,20 @@ public class Produtos {
         this.categoria = categoria;
     }
 
+    public String getDescricao() {
+        return descricao;
+    }
 
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(String dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 
 }
