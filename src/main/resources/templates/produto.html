@@ -1,47 +1,85 @@
-<!-- produtos.html -->
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Produtos</title>
-</head>
-<body>
-    <!-- Conteúdo que será injetado no layout-base -->
-    <div th:fragment="conteudo">
-        <h2>Produtos</h2>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Gerenciar Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <h2>Menu</h2>
+        <a th:href="@{/}">Início</a>
+        <a th:href="@{/produtos}">Produtos</a>
+        <a th:href="@{/categorias}">Categorias</a>
+      </div>
 
-        <!-- Formulário para adicionar produto -->
-        <form action="/produtos/adicionar" method="post">
-            <input type="text" name="titulo" placeholder="Título" required />
-            <input type="text" name="descricao" placeholder="Descrição" />
-            <input type="number" name="preco" placeholder="Preço" step="0.01" />
-            <select name="categoria.id">
-                <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nome}"></option>
-            </select>
-            <button type="submit">Salvar</button>
+      <div class="content">
+        <h1>Gerenciar Produtos</h1>
+
+        <!-- FORMULÁRIO DE CADASTRO -->
+        <form
+          th:action="@{/produtos/salvar}"
+          method="post"
+          th:object="${produto}"
+        >
+          <input
+            type="text"
+            th:field="*{titulo}"
+            placeholder="Título"
+            required
+          />
+          <input
+            type="number"
+            th:field="*{preco}"
+            placeholder="Preço"
+            step="0.01"
+            required
+          />
+
+          <select th:field="*{categoria.id}">
+            <option value="" disabled selected>Selecione uma categoria</option>
+            <option
+              th:each="cat : ${categorias}"
+              th:value="${cat.id}"
+              th:text="${cat.nome}"
+            ></option>
+          </select>
+
+          <button type="submit">Salvar</button>
         </form>
 
-        <!-- Tabela de produtos -->
+        <!-- TABELA DE PRODUTOS -->
         <table>
-            <thead>
-                <tr>
-                    <th>Título</th>
-                    <th>Descrição</th>
-                    <th>Categoria</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="p : ${produtos}">
-                    <td th:text="${p.titulo}"></td>
-                    <td th:text="${p.descricao}"></td>
-                    <td th:text="${p.categoria.nome}"></td>
-                    <td>
-                        <a th:href="@{'/produtos/editar/' + ${p.id}}">Editar</a>
-                    </td>
-                </tr>
-            </tbody>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Preço</th>
+              <th>Categoria</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="p : ${produtos}">
+              <td th:text="${p.id}"></td>
+              <td th:text="${p.titulo}"></td>
+              <td th:text="${p.preco}"></td>
+              <td
+                th:text="${p.categoria != null ? p.categoria.nome : 'Sem categoria'}"
+              ></td>
+              <td>
+                <a th:href="@{'/produtos/editar/' + ${p.id}}">Editar</a> |
+                <a
+                  th:href="@{'/produtos/excluir/' + ${p.id}}"
+                  style="color: red"
+                  >Excluir</a
+                >
+              </td>
+            </tr>
+          </tbody>
         </table>
+      </div>
     </div>
-</body>
+  </body>
 </html>

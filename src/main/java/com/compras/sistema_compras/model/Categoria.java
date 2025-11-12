@@ -13,13 +13,13 @@ public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String nome;
 
     @OneToMany(mappedBy = "categoria")
     private List<Produtos> produtos;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 

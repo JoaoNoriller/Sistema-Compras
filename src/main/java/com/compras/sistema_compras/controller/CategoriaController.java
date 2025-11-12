@@ -1,13 +1,10 @@
 package com.compras.sistema_compras.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,26 +18,18 @@ public class CategoriaController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    // LISTAR TODAS AS CATEGORIAS
+    // LISTAR E CADASTRAR CATEGORIAS
     @GetMapping
     public String listarCategorias(Model model) {
-        List<Categoria> categorias = categoriaRepository.findAll();
-        model.addAttribute("categorias", categorias);
-        model.addAttribute("novaCategoria", new Categoria());
-        return "categorias"; // Template categorias.html
+        model.addAttribute("categorias", categoriaRepository.findAll());
+        model.addAttribute("categoria", new Categoria());
+        return "categoria";
     }
 
-    // CADASTRAR NOVA CATEGORIA
-    @PostMapping("/adicionar")
-    public String adicionarCategoria(@ModelAttribute Categoria novaCategoria) {
-        categoriaRepository.save(novaCategoria);
-        return "redirect:/categorias";
-    }
-
-    // EXCLUIR (opcional)
-    @GetMapping("/excluir/{id}")
-    public String excluirCategoria(@PathVariable Long id) {
-        categoriaRepository.deleteById(id);
+    // SALVAR CATEGORIA
+    @PostMapping("/salvar")
+    public String salvarCategoria(@ModelAttribute Categoria categoria) {
+        categoriaRepository.save(categoria);
         return "redirect:/categorias";
     }
 }

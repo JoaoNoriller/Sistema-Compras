@@ -1,7 +1,5 @@
 package com.compras.sistema_compras.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.compras.sistema_compras.model.Categoria;
 import com.compras.sistema_compras.model.Produtos;
 import com.compras.sistema_compras.repository.CategoriaRepository;
 import com.compras.sistema_compras.repository.ProdutoRepository;
@@ -24,50 +21,49 @@ public class ProdutoController {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @GetMapping("/")
-    public String Inicio(Model model) {
-        model.addAttribute("paginaCategoria", categoriaRepository.findAll());
-        model.addAttribute("paginaProduto", produtoRepository.findAll());
-        return "index";
-
-    }
-     // FORMULÁRIO PARA CADASTRAR NOVO PRODUTO
-    @GetMapping("/novo")
-    public String mostrarFormularioNovoProduto(Model model) {
-        model.addAttribute("produto", new Produtos());
+    // LISTAR PRODUTOS
+    @GetMapping("/produtos")
+    public String listarProdutos(Model model) {
+        model.addAttribute("produtos", produtoRepository.findAll());
         model.addAttribute("categorias", categoriaRepository.findAll());
-        return "produto"; // Template novo-produto.html
+        model.addAttribute("produto", new Produtos());
+        return "produto"; // nome do HTML
     }
 
-    // CADASTRAR NOVO PRODUTO
-    @PostMapping("/adicionar")
-    public String adicionarProduto(@ModelAttribute Produtos novoProduto) {
-        produtoRepository.save(novoProduto);
-        return "redirect:/Produtos";
+    // SALVAR NOVO PRODUTO
+    @PostMapping("/produtos/salvar")
+    public String salvarProduto(@ModelAttribute Produtos produto) {
+        produtoRepository.save(produto);
+        return "redirect:/produtos";
     }
 
-    // EDITAR PRODUTO (carregar formulário)
-    @GetMapping("/editar/{id}")
+    // EDITAR PRODUTO
+    @GetMapping("/produtos/editar/{id}")
     public String editarProduto(@PathVariable Long id, Model model) {
         Produtos produto = produtoRepository.findById(id).orElse(null);
-        List<Categoria> categorias = categoriaRepository.findAll();
         model.addAttribute("produto", produto);
-        model.addAttribute("categorias", categorias);
-        return "editar-produto"; // Template editar-produto.html
+        model.addAttribute("categorias", categoriaRepository.findAll()); // Adiciona a lista de categorias
+        return "editar-produto";
+
     }
 
-    // ATUALIZAR PRODUTO
-    @PostMapping("/atualizar")
-    public String atualizarProduto(@ModelAttribute Produtos produtoAtualizado) {
-        produtoRepository.save(produtoAtualizado);
-        return "redirect:/Produtos";
+    @PostMapping("/produtos/atualizar")
+    public String atualizarProduto(@ModelAttribute Produtos produto) {
+        produtoRepository.save(produto);
+        return "redirect:/produtos";
     }
 
     // EXCLUIR PRODUTO
-    @GetMapping("/excluir/{id}")
+    @GetMapping("/produtos/excluir/{id}")
     public String excluirProduto(@PathVariable Long id) {
         produtoRepository.deleteById(id);
-        return "redirect:/Produtos";
+        return "redirect:/produtos";
     }
-}
+     //CARREGAR PAGINA INICIAL
+    @GetMapping("/")
+    public String index(Model model) {
+        model.addAttribute("produtos", produtoRepository.findAll());
+        return "index";
+    }
 
+}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Categorias</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <h2>Menu</h2>
+        <a th:href="@{/}">Início</a>
+        <a th:href="@{/produtos}">Produtos</a>
+        <a th:href="@{/categorias}">Categorias</a>
+      </div>
+
+      <div class="content">
+        <h1>Gerenciar Categorias</h1>
+
+        <form
+          th:action="@{/categorias/salvar}"
+          method="post"
+          th:object="${categoria}"
+        >
+          <input
+            type="text"
+            th:field="*{nome}"
+            placeholder="Nome da categoria"
+            required
+          />
+          <button type="submit">Salvar</button>
+        </form>
+
+        <h2>Categorias Cadastradas</h2>
+        <ul>
+          <li th:each="cat : ${categorias}" th:text="${cat.nome}"></li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
