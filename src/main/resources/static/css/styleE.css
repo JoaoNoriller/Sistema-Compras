@@ -1,0 +1,78 @@
+/* Fundo suave */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Centralização do card */
+.editar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Card estilizado */
+.card-editar {
+    width: 420px;
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.card-editar h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-align: center;
+    color: #2f3e46;
+}
+
+/* Grupos de inputs */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    margin-bottom: 5px;
+    color: #354f52;
+    font-weight: bold;
+}
+
+/* Inputs */
+.form-group input,
+.form-group select {
+    padding: 12px;
+    border: 1px solid #b7b7b7;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #52796f;
+    box-shadow: 0 0 4px rgba(83, 121, 111, 0.4);
+}
+
+/* Botão */
+.btn-salvar {
+    width: 100%;
+    padding: 12px;
+    background-color: #354f52;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-salvar:hover {
+    background-color: #52796f;
+}

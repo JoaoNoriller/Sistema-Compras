@@ -6,5 +6,6 @@ import com.compras.sistema_compras.model.Categoria;
  
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
+    boolean existsByNome(String nome);
 
 }

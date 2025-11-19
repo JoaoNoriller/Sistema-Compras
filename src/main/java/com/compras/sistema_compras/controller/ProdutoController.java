@@ -26,7 +26,7 @@ public class ProdutoController {
     @GetMapping("/produtos")
     public String listarProdutos(Model model) {
         model.addAttribute("produtos", produtoService.exibirTodos());
-        model.addAttribute("categorias", categoriaService.findAll());
+        model.addAttribute("categorias", categoriaService.exebirTodos());
         model.addAttribute("produto", new Produtos());
         return "produto"; // nome do HTML
     }
@@ -43,7 +43,7 @@ public class ProdutoController {
     public String editarProduto(@PathVariable Long id, Model model) {
         Produtos produto = produtoService.findById(id).orElse(null);
         model.addAttribute("produto", produto);
-        model.addAttribute("categorias", categoriaService.findAll()); // Adiciona a lista de categorias
+        model.addAttribute("categorias", categoriaService.exebirTodos()); // Adiciona a lista de categorias
         return "editar-produto";
 
     }

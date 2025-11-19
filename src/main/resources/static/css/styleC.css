@@ -1,0 +1,161 @@
+/* ==========================
+   LAYOUT PRINCIPAL
+========================== */
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* ==========================
+   SIDEBAR
+========================== */
+.sidebar {
+    width: 230px;
+    background-color: #2f3e46;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: #ffffff;
+}
+
+.sidebar h2 {
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.sidebar a {
+    text-decoration: none;
+    padding: 12px;
+    background-color: #354f52;
+    color: white;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background-color: #52796f;
+}
+
+/* ==========================
+   CONTEÚDO
+========================== */
+.content {
+    flex: 1;
+    padding: 30px;
+}
+
+/* ==========================
+   FORMULÁRIO
+========================== */
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+form input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #354f52;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #52796f;
+}
+
+/* ==========================
+   TABELA
+========================== */
+.tabela-categorias {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-categorias th,
+.tabela-categorias td {
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.btn-excluir {
+    color: #b00020;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ==========================
+   POP-UP DE MENSAGEM
+========================== */
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #b00020; /* erro */
+    color: white;
+    padding: 15px 22px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    font-size: 16px;
+    font-weight: bold;
+    z-index: 9999;
+    animation: slideIn 0.4s ease, fadeOut 4s forwards 2.5s;
+}
+
+/* POP-UP SUCESSO */
+.popup.success {
+    background-color: #2e7d32;
+}
+
+/* ANIMAÇÃO ENTRAR */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* ANIMAÇÃO SAIR */
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateX(80px);
+    }
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        flex-direction: row;
+        overflow-x: auto;
+    }
+
+    .sidebar a {
+        flex: 1;
+        text-align: center;
+    }
+}

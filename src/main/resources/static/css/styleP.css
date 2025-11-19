@@ -14,7 +14,7 @@ body {
 }
 
 /* ==========================
-   LAYOUT GERAL INDEX
+   LAYOUT GERAL PRODUTOS
 ========================== */
 .container {
   display: flex;
@@ -24,20 +24,19 @@ body {
 .sidebar {
   width: 220px;
   background-color: #2f3e46;
-  color: #fff;
   padding: 20px;
+  color: white;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
 .sidebar h2 {
-  margin-bottom: 20px;
   text-align: center;
 }
 
 .sidebar a {
-  color: #fff;
+  color: white;
   text-decoration: none;
   padding: 10px;
   border-radius: 5px;
@@ -53,32 +52,48 @@ body {
   padding: 40px;
 }
 
-.content h1 {
-  margin-bottom: 10px;
-  font-size: 2rem;
+/* ==========================
+   FORMULÁRIO PRODUTOS
+========================== */
+form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
 }
 
-.content p {
-  margin-bottom: 20px;
+form input,
+form select {
+  padding: 12px;
+  border: 1px solid #999;
+  border-radius: 6px;
 }
 
-.content h2 {
-  margin-top: 20px;
+form button {
+  background-color: #52796f;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form button:hover {
+  background-color: #354f52;
 }
 
 /* ==========================
-   TABELA (INDEX)
+   TABELA PRODUTOS
 ========================== */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
 }
 
 table th {
+  padding: 12px;
   background-color: #52796f;
   color: white;
-  padding: 12px;
 }
 
 table td {
@@ -90,19 +105,14 @@ table tr:hover {
   background-color: #e6f0ea;
 }
 
-/* ==========================
-   LISTA CATEGORIAS (INDEX)
-========================== */
-ul {
-  list-style: none;
-  padding-left: 0;
+table td a {
+  color: #52796f;
+  text-decoration: none;
+  font-weight: bold;
 }
 
-ul li {
-  background-color: #cad2c5;
-  padding: 10px;
-  border-radius: 5px;
-  margin-bottom: 8px;
+table td a:hover {
+  text-decoration: underline;
 }
 
 /* ==========================
@@ -110,6 +120,10 @@ ul li {
 ========================== */
 @media (max-width: 768px) {
   .container {
+    flex-direction: column;
+  }
+
+  form {
     flex-direction: column;
   }
 }

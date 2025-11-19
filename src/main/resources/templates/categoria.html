@@ -3,10 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>Categorias</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/css/styleC.css}" />
   </head>
+
   <body>
     <div class="container">
+      <!-- SIDEBAR -->
       <div class="sidebar">
         <h2>Menu</h2>
         <a th:href="@{/}">Início</a>
@@ -14,9 +16,11 @@
         <a th:href="@{/categorias}">Categorias</a>
       </div>
 
+      <!-- CONTEÚDO PRINCIPAL -->
       <div class="content">
         <h1>Gerenciar Categorias</h1>
 
+        <!-- FORMULÁRIO -->
         <form
           th:action="@{/categorias/salvar}"
           method="post"
@@ -31,10 +35,39 @@
           <button type="submit">Salvar</button>
         </form>
 
+          <!-- POPUP DE ERRO -->
+          <div th:if="${erro}" class="popup-erro">
+            <a th:text="${erro}"></a> <button onclick="this.parentElement.style.display='none'">OK</button>
+          </div>
+
         <h2>Categorias Cadastradas</h2>
-        <ul>
-          <li th:each="cat : ${categorias}" th:text="${cat.nome}"></li>
-        </ul>
+
+        <!-- TABELA -->
+        <table class="tabela-categorias">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nome</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr th:each="cat : ${categorias}">
+              <td th:text="${cat.id}"></td>
+              <td th:text="${cat.nome}"></td>
+              <td>
+                <a
+                  class="btn-excluir"
+                  th:href="@{/categorias/excluir/{id}(id=${cat.id})}"
+                  onclick="return confirm('Tem certeza que deseja excluir esta categoria?');"
+                >
+                  Excluir
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </body>
